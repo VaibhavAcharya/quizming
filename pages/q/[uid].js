@@ -12,7 +12,7 @@ export default function Quiz({ uid }) {
   const [quiz, setQuiz] = useState(undefined);
 
   useEffect(function () {
-    return firebase
+    const UnsubscribeQuizzes = firebase
       .firestore()
       .collection("quizzes")
       .doc(uid)
@@ -20,10 +20,13 @@ export default function Quiz({ uid }) {
         const data = snap.data();
         setQuiz(data ? { ...data, uid: uid } : null);
       });
+    return function () {
+      UnsubscribeQuizzes()
+    }
   }, []);
 
   return (
-    <Layout showAction={quiz.status === "finished"}>
+    <Layout showAction={quiz?.status === "finished"}>
       {quiz !== undefined ? (
         quiz ? (
           <>
