@@ -12,7 +12,7 @@ export default function QuizIndex() {
     if (initialized) {
       Router.push("/");
     }
-  }, [])
+  }, [initialized])
 
   return <Layout></Layout>;
 }
