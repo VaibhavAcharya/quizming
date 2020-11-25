@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from "next/head";
 import { CssBaseline, GeistProvider } from "@geist-ui/react";
 import { UserProvider } from "../components/firebase/UserContext";
 
