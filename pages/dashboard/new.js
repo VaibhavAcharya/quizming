@@ -187,11 +187,14 @@ export default function NewQuiz() {
     [questions.length]
   );
 
-  useEffect(function () {
-    if (initialized && !user) {
-      Router.push("/");
-    }
-  }, [user])
+  useEffect(
+    function () {
+      if (initialized && !user) {
+        Router.push("/");
+      }
+    },
+    [user]
+  );
 
   return (
     <Layout>

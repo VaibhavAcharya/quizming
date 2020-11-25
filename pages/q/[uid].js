@@ -21,8 +21,8 @@ export default function Quiz({ uid }) {
         setQuiz(data ? { ...data, uid: uid } : null);
       });
     return function () {
-      UnsubscribeQuizzes()
-    }
+      UnsubscribeQuizzes();
+    };
   }, []);
 
   return (

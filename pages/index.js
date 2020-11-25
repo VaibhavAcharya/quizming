@@ -13,14 +13,17 @@ import useUser from "../components/firebase/useUser";
 import Layout from "../components/Layout";
 
 export default function Home() {
-  const Router = useRouter()
+  const Router = useRouter();
   const { user, initialized } = useUser();
 
-  useEffect(function () {
-    if (initialized && user) {
-      Router.push("/dashboard");
-    }
-  }, [user])
+  useEffect(
+    function () {
+      if (initialized && user) {
+        Router.push("/dashboard");
+      }
+    },
+    [user]
+  );
 
   return (
     <Layout>

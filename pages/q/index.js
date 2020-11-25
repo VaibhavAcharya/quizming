@@ -8,11 +8,14 @@ export default function QuizIndex() {
   const Router = useRouter();
   const { initialized } = useUser();
 
-  useEffect(function () {
-    if (initialized) {
-      Router.push("/");
-    }
-  }, [initialized])
+  useEffect(
+    function () {
+      if (initialized) {
+        Router.push("/");
+      }
+    },
+    [initialized]
+  );
 
   return <Layout></Layout>;
 }

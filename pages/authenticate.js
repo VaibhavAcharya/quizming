@@ -10,11 +10,14 @@ export default function Authenticate() {
 
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-  useEffect(function () {
-    if (initialized && user) {
-      Router.push("/dashboard");
-    }
-  }, [user])
+  useEffect(
+    function () {
+      if (initialized && user) {
+        Router.push("/dashboard");
+      }
+    },
+    [user]
+  );
 
   return (
     <Layout showAction={false}>
