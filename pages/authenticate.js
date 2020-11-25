@@ -1,6 +1,6 @@
 import { Button, Divider, Row, Spacer, Text } from "@geist-ui/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useUser from "../components/firebase/useUser";
 import Layout from "../components/Layout";
 
@@ -10,9 +10,11 @@ export default function Authenticate() {
 
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-  if (initialized && user) {
-    Router.push("/dashboard");
-  }
+  useEffect(function () {
+    if (initialized && user) {
+      Router.push("/dashboard");
+    }
+  }, [user])
 
   return (
     <Layout showAction={false}>

@@ -7,15 +7,18 @@ import {
   Spacer,
   Text,
 } from "@geist-ui/react";
+import { useEffect } from "react";
 import useUser from "../components/firebase/useUser";
 import Layout from "../components/Layout";
 
 export default function Home() {
   const { user, initialized } = useUser();
 
-  if (initialized && user) {
-    Router.push("/dashboard");
-  }
+  useEffect(function () {
+    if (initialized && user) {
+      Router.push("/dashboard");
+    }
+  }, [user])
 
   return (
     <Layout>
