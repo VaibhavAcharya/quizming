@@ -1,4 +1,4 @@
-This is full blown beautiful web-app to manage lot of quizzes easily and fast.
+This is full blown beautiful web-app to manage lot of quizzes easily and fast. [Demo](https://quizming.vercel.app/)
 
 ## Getting Started
 
