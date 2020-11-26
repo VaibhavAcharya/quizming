@@ -2,7 +2,18 @@ import { useState } from "react";
 
 import firebase from "./../../lib/firebase";
 
-import { Button, Dot, Fieldset, Link } from "@geist-ui/react";
+import {
+  Button,
+  Dot,
+  Fieldset,
+  Link,
+  Row,
+  Spacer,
+  useClipboard,
+  useToasts,
+} from "@geist-ui/react";
+import { Clipboard } from "@geist-ui/react-icons";
+import getBaseURL from "../../utilities/getBaseURL";
 
 function changeQuizState(uid, newState, setLoading) {
   setLoading(true);
@@ -59,7 +70,7 @@ function Action({ uid, type, message, callback }) {
   return (
     <Button
       auto
-      size="small"
+      size="mini"
       type={type}
       loading={loading}
       onClick={function () {
@@ -72,12 +83,27 @@ function Action({ uid, type, message, callback }) {
 }
 
 export default function QuizProfile({ uid, title, status }) {
+  const { copy } = useClipboard();
+  const [, setToasts] = useToasts();
+
   return (
     <Fieldset style={{ marginBottom: "2vh" }}>
       <Fieldset.Title>
-        <Link href={`/q/${uid}`} target="_blank" color icon>
-          {title}
-        </Link>
+        <Row align="middle" justify="start">
+          <Button
+            auto
+            size="mini"
+            icon={<Clipboard />}
+            onClick={function () {
+              copy(`${getBaseURL()}/q/${uid}`);
+              setToasts({ text: "Copied successfully!", type: "success" });
+            }}
+          />
+          <Spacer inline x={0.5} />
+          <Link href={`/q/${uid}`} target="_blank" color icon>
+            {title}
+          </Link>
+        </Row>
       </Fieldset.Title>
       <Fieldset.Subtitle>
         <StatusDot {...{ ...statuses[status] }} />

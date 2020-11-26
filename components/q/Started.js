@@ -64,30 +64,41 @@ export default function QuizStarted({ quiz }) {
       isNotNull(candidate.classification)
     ) {
       if (
-        !(quiz.candidates || [])
-          .map(function (candidate) {
-            return candidate.email;
-          })
-          .includes(candidate.email)
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          candidate.email
+        )
       ) {
-        setIsSubmitting(true);
-        firebase
-          .firestore()
-          .collection("quizzes")
-          .doc(quiz.uid)
-          .update({
-            candidates: [...(quiz.candidates || []), candidate],
-          })
-          .then(function () {
-            Router.push("/postsubmit");
-          })
-          .catch(function (e) {
-            setToasts({ text: "Unexpected error happened!", type: "error" });
-            console.log(e);
+        if (
+          !(quiz.candidates || [])
+            .map(function (candidate) {
+              return candidate.email;
+            })
+            .includes(candidate.email)
+        ) {
+          setIsSubmitting(true);
+          firebase
+            .firestore()
+            .collection("quizzes")
+            .doc(quiz.uid)
+            .update({
+              candidates: [...(quiz.candidates || []), candidate],
+            })
+            .then(function () {
+              Router.push("/postsubmit");
+            })
+            .catch(function (e) {
+              setToasts({ text: "Unexpected error happened!", type: "error" });
+              console.log(e);
+            });
+        } else {
+          setToasts({
+            text: "A candidate with this email has already submitted!",
+            type: "error",
           });
+        }
       } else {
         setToasts({
-          text: "A candidate with this email has already submitted!",
+          text: "Please enter a valid for email!",
           type: "error",
         });
       }
