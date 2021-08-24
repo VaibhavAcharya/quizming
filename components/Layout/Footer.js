@@ -6,8 +6,9 @@ export default function Footer() {
       <Row align="middle" justify="space-between">
         <Text>&copy; 2020</Text>
         <Link
-          href="https://instagram.com/vaibhavacharya_/"
+          href="https://vaibhavacharya.github.io"
           target="_blank"
+          rel="noreferrer noopener"
           color
         >
           Vaibhav Acharya
